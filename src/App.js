@@ -9,14 +9,12 @@ function App() {
   const [autor, setAutor] = useState('')
   const [data, setData] = useState('')
   const [id, setID] = useState('')
-  const [total, setTotal] = useState('')
 
   function cadastrar() {
     let livro = {
       titulo,
       autor,
       data,
-      total: totalSoma(),
       id: randomID(),
     }
 
@@ -36,15 +34,12 @@ function App() {
   }
 
   function totalSoma() {
-    let qtdT = 0
-
-    for (let i = 0; i < livros.length; i++) {
-      const livro = livros[i]
-
-      if (livro.titulo === titulo) {
-        qtdT++
-      }
-    }
+    let counter = 0
+    
+    livros.forEach((livro, i) => {
+        counter++
+    })
+    return counter
   }
 
   function limparForm() {
@@ -72,7 +67,7 @@ function App() {
               onChange={(e) => {
                 setTitulo(e.target.value)
               }}
-              className="input01"
+              className="input01 overflow-auto"
               placeholder="Título do livro"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
@@ -108,8 +103,10 @@ function App() {
         <Button className="mb-5 btn" onClick={cadastrar}>
           Cadastrar livro
         </Button>
+
+
         <Table striped bordered hover>
-          <tr>
+          <tr class="tr01">
             <th>Título</th>
             <th>Autor</th>
             <th>Data</th>
@@ -117,33 +114,33 @@ function App() {
             <th>Editar</th>
           </tr>
           <tbody>
+          <div class="table-overflow">
             {livros.map((livro) => {
               return (
                 <tr>
-                  <td>{livro.titulo}</td>
+                  <td class="td-title">{livro.titulo}</td>
                   <td>{livro.autor}</td>
                   <td>{livro.data}</td>
                   <td>{livro.id}</td>
-                  <td>
+                  <td class="td-btn">
                     <Button
-                      className="btn02"
+                      className="btn-delete"
                       onClick={() => {
                         excluir(livro.titulo)
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </Table>
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })}
+              </div>
+            </tbody>
+          </Table>
+
       </div>
-              return (
-                <h6>{`Total de livros na biblioteca: ${totalSoma()}`}</h6>
-              )
-            
+        <h6>Total de livros na biblioteca: {totalSoma(livros)}</h6>         
     </>
   )
 }
