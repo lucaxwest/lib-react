@@ -1,21 +1,18 @@
 import './App.css'
 import { Form, Table, InputGroup, Button } from 'react-bootstrap'
 import { useState } from 'react'
-import { isDocument } from '@testing-library/user-event/dist/utils'
 
 function App() {
   const [livros, setLivros] = useState([])
   const [titulo, setTitulo] = useState('')
   const [autor, setAutor] = useState('')
   const [data, setData] = useState('')
-  const [id, setID] = useState('')
 
   function cadastrar() {
     let livro = {
       titulo,
       autor,
       data,
-      id: randomID(),
     }
 
     setLivros([livro, ...livros])
@@ -46,14 +43,6 @@ function App() {
     setTitulo('')
     setAutor('')
     setData('')
-  }
-
-  function randomID() {
-    let array = 0
-
-    for (let i = 0; i < array.length; i++) {
-      array++
-    }
   }
 
   return (
