@@ -7,12 +7,19 @@ function App() {
   const [titulo, setTitulo] = useState('')
   const [autor, setAutor] = useState('')
   const [data, setData] = useState('')
+  const [id, setId] = useState(1)
+
+
+  function incrementID() {
+    setId(id + 1)
+  }
 
   function cadastrar() {
     let livro = {
       titulo,
       autor,
       data,
+      id
     }
 
     setLivros([livro, ...livros])
@@ -45,6 +52,11 @@ function App() {
     setData('')
   }
 
+  function ButtonAddIDeCAD() {
+    cadastrar()
+    incrementID()
+  }
+
   return (
     <>
       <div className="container">
@@ -56,7 +68,7 @@ function App() {
               onChange={(e) => {
                 setTitulo(e.target.value)
               }}
-              className="input01 overflow-auto"
+              className="overflow-auto"
               placeholder="Título do livro"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
@@ -69,7 +81,6 @@ function App() {
               onChange={(e) => {
                 setAutor(e.target.value)
               }}
-              className="input01"
               placeholder="Nome do autor"
               aria-label="Default"
               aria-describedby="inputGroup-sizing-default"
@@ -89,7 +100,7 @@ function App() {
           </InputGroup>
         </div>
 
-        <Button className="mb-5 btn" onClick={cadastrar}>
+        <Button className="mb-5 btn" onClick={ButtonAddIDeCAD}>
           Cadastrar livro
         </Button>
 
